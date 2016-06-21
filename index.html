@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Storytelling</title>
+	<link rel="stylesheet" href="css/jquery.fullPage.css">
+	<link rel="stylesheet" href="css/normalize.css">
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/style.css">
+	<script src="js/jquery.min.js"></script>
+	<script src="js/jquery.easings.min.js"></script>
+	<script src="js/scrolloverflow.min.js"></script>
+	<script src="js/jquery.fullPage.min.js"></script>	
+	<script src="js/script.js"></script>
+</head>
+<body>
+<header>
+  <div id="header">
+  	<ul id="menu">
+	    <li data-menuanchor="firstPage" class="active"><a href="#firstPage">First slide</a></li>
+	    <li data-menuanchor="secondPage"><a href="#secondPage">Second slide</a></li>
+	    <li data-menuanchor="3rdPage"><a href="#3rdPage">Third slide</a></li>
+	    <li data-menuanchor="4thpage"><a href="#4thpage">Forth slide</a></li>
+	    <li data-menuanchor="lastPage"><a href="#lastPage">Footer</a></li>
+	</ul>
+  </div>
+  <div id="fullpage">
+	<div class="section active" id="section0">
+	  <div class="container">
+		<div class="row">
+			<div class="col-sm-6"><h1>fullPage.js</h1></div>
+			<div class="col-sm-6">
+				<p>При реализации 4х уровневой модели тарификации патча HRS_CONFIG 086.00 релиза R7.4.1 и выше, при доработке кешей платных и бесплатных телефонов была допущена неточность, приводящая к плавающей ошибке поиска специальных телефонов.</p>
+				<p>Для устранения проблемы в файле «user_specific\sql\bis_rating_std\bis_std_sql_special_phones.cfg» для кешей bis_std_sql_select_free_phones и bis_std_sql_select_pay_phones &nbsp;необходимо:</p>
+				<p>секцию SQL выражения</p>
+				<p>«" order by rtpl_rtpl_id, home_tfrg_id, home_rmop_id, cou_cou_id, rmop_rmop_id, srls_srls_id, tfrg_tfrg_id, rgns_rgns_id, tmcl_tmcl_id, start_date ";»</p>
+				<p>заменить на</p>
+				<p>«" order by rtpl_rtpl_id, home_tfrg_id, home_rmop_id,&nbsp;<strong>rmtp_rmtp_id,</strong>&nbsp;cou_cou_id, rmop_rmop_id, srls_srls_id, tfrg_tfrg_id, rgns_rgns_id, tmcl_tmcl_id, start_date ";»,</p>
+				<p>добавив поле «rmtp_rmtp_id» как указано в примере.</p>
+
+			</div>
+		</div>
+	  </div>	
+	</div>
+	<div class="section" id="section1">
+	  <div class="container">
+		<div class="node-2098 node node-news view-mode-full clearfix" about="/news/2098" typeof="sioc:Item foaf:Document">
+		   <div class="DateNews">17.06.2016</div>		 
+		 	<p><strong>Уважаемые коллеги! </strong><br>
+			<br>
+			Просим Вас обратить внимание на следующие особенности версий подсистемы HRS_RT.<br>
+			<br>
+			Начиная с версии 086.00 в подсистеме HRS_RT реализован ФК 4LEVELRATE,&nbsp;в рамках которого возможно определение роумингового оператора (rmop_id) для локальных вызовов.<br>
+			<br>
+			Поиск трафика в функции traffic_searching с учетом rmop_id происходит по следующему алгоритму:<br>
+			<br>
+			<strong>Для версий HRS_RT с 086.00 по 088.02</strong><br>
+			<br>
+			- если rmop_id не определился (rmop_rmop_id = null) в таблице TRAFIC_HISTORIES производится поиск записи с rmop_rmop_id = null.<br>
+			<br>
+			- если rmop_id определился, то в таблице TRAFIC_HISTORIES производится поиск записи с rmop_rmop_id равным данному значению. Если такая запись не будет найдена, то будет выполнен поиск записи с rmop_rmop_id = null.<br>
+			<br>
+			<strong>Для версий HRS_RT до 086.00 и начиная с 088.03</strong><br>
+			<br>
+			- если rmop_id не определился (rmop_rmop_id = null), то считается, что вызов локальный и по умолчанию получает специальное значение – 0 (свой абонент в своей сети). При этом в таблице TRAFIC_HISTORIES производится поиск записи с rmop_rmop_id = 0. Если такая запись не будет найдена, то будет выполнен поиск записи с rmop_rmop_id = null.<br>
+			<br>
+			- если rmop_id определился, то в таблице TRAFIC_HISTORIES производится поиск записи с rmop_rmop_id равным данному значению. Если такая запись не будет найдена, то будет выполнен поиск записи с rmop_rmop_id = null.</p>
+			<p>Начиная с версии HRS_RT &nbsp;086.00 если rmop_id (сеть посещения) совпадает с собственной сетью абонента, то перед поиском записи с rmop_rmop_id = null будет выполнен поиск записи с rmop_rmop_id = 0, то есть потенциально traffic_searching может выполнить 3 поиска. Таким образом если НСИ соответствующим образом заполнена, то будет определяться собственная сеть абонента и traffic_searching должен находить запись с rmop_rmop_id = 0.</p>
+			<p>При этом, начиная с HRS_RT &nbsp;086.00, возможна отличная от предыдущих версий&nbsp;тарификация (т.к. тариф из таблицы TRAFIC_HISTORIES будет браться с учетом найденного rmop_id для локального вызова).<br>
+			<br>
+			<strong>Примеры проблемных ситуаций</strong><br>
+			<br>
+			1. Имеются записи<br>
+			<br>
+			select count(*) from trafic_histories th<br>
+			<br>
+			where sysdate between th.start_date and th.end_date<br>
+			<br>
+			and th.rmop_rmop_id = 0;<br>
+			<br>
+			и по таблице ROAM_GT_RANGES определяется rmop_id (сеть посещения) &nbsp;для собственных абонентов, которая не совпадает с собственной сетью абонента. Для исправления необходима корректировка НСИ (за конкретными рекомендациями обращаться в Отдел Технического Сопровождения).<br>
+			<br>
+			2. В таблице ROAM_GT_RANGES ошибочно заданы собственные диапазоны GT, в результате чего некорректно определяется rmop_id для собственных абонентов. Для исправления необходимо правильно задать диапазоны GT.<br>
+			<br>
+			<strong>С уважением</strong><br>
+			<br>
+			<strong>Отдел Технического Сопровождения</strong></p>
+			<p class="BackContact">← 
+		 	<a href="/news">Назад к списку новостей</a></p> 
+		 	<p>Исправления войдут в патч&nbsp;HRS_CONFIG 088.03 на R7.6 в течение ближайших часов.&nbsp;</p>
+			<p>И штатно будут внесены в патч HRS_CONFIG 089.00 (релиз R7.7).</p>
+			<p>Патчи на остальные версии будут выпущены по запросу.</p>
+			<p>секцию SQL выражения</p>
+			<p>«" order by rtpl_rtpl_id, home_tfrg_id, home_rmop_id, cou_cou_id, rmop_rmop_id, srls_srls_id, tfrg_tfrg_id, rgns_rgns_id, tmcl_tmcl_id, start_date ";»</p>
+			<p>заменить на</p>
+			<p>«" order by rtpl_rtpl_id, home_tfrg_id, home_rmop_id,&nbsp;<strong>rmtp_rmtp_id,</strong>&nbsp;cou_cou_id, rmop_rmop_id, srls_srls_id, tfrg_tfrg_id, rgns_rgns_id, tmcl_tmcl_id, start_date ";»,</p>
+			<p>добавив поле «rmtp_rmtp_id» как указано в примере.</p>
+			<p>Исправления войдут в патч&nbsp;HRS_CONFIG 088.03 на R7.6 в течение ближайших часов.&nbsp;</p>
+			<p>И штатно будут внесены в патч HRS_CONFIG 089.00 (релиз R7.7).</p>
+			<p>Патчи на остальные версии будут выпущены по запросу.</p>			
+		</div>
+	  </div>
+	</div>
+	<div class="section" id="section2"><h1>No wraps, no extra markup</h1></div>
+	<div class="section" id="section3"><h1>Just the simplest demo ever</h1></div>
+	<div class="section fp-auto-height" id="section2">
+        <div class="intro footer">
+            <h1>My footer</h1>
+            <p>This could be my footer.</p>
+        </div>
+    </div>
+  </div>
+</body>
+</html>
