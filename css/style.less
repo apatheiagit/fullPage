@@ -1,12 +1,13 @@
 .section{
   background-size: cover;
-  color: #FFF;
+  color: #000;
   & .container{
     padding-top: 60px;
   }
 }
 #section0{
   background-image: url(../img/bg1.jpg);
+  color: #FFF;
 }
 #section1{
   background-image: url(../img/bg2.jpg);
@@ -17,11 +18,17 @@
 #section3{
   background-image: url(../img/bg4.jpg);
 }
-#section3 h1{
-  color: #000;
+#section4{
+  background-image: url(../img/map.jpg);
 }
-.node{
-  background-color: rgba(0, 47, 77, .6);
+#section5{
+  background: linear-gradient(to top, #5ac1d2, #dce0e1);
+}
+#section6{
+  background-image: url(../img/bg5.jpg);
+}
+#section7{
+  background-image: url(../img/footer.jpg);
 }
 #header{
   position:fixed;
@@ -38,14 +45,19 @@
   top:0px;
 }
 
-#menu li {
+#menu li{
   display:inline-block;
-  margin: 10px;
+  margin: 5px 10px;
   color: #000;
   background:#fff;
   background: rgba(255,255,255, 0.5);
   -webkit-border-radius: 10px;
-  border-radius: 10px;
+  border-radius: 10px;  
+  &:first-child{
+    & a{
+      padding: 0px 0px;
+    }    
+  }
 }
 #menu li.active{
   background:#666;
@@ -55,6 +67,8 @@
 #menu li a{
   text-decoration:none;
   color: #000;
+  padding: 9px 18px;
+  display:block;  
 }
 #menu li.active a:hover{
   color: #000;
@@ -64,12 +78,15 @@
 }
 #menu li a,
 #menu li.active a{
-  padding: 9px 18px;
-  display:block;
+  
 }
 #menu li.active a{
   color: #fff;
 }
 .footer{
     padding: 50px 0;
+    height: 150px;
+}
+.padd50px{
+  padding: 50px 0;
 }

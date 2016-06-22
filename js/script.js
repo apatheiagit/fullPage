@@ -1,7 +1,8 @@
 $(document).ready(function() {
   $('#fullpage').fullpage({
-    anchors: ['firstPage', 'secondPage', '3rdPage', '4thpage', 'lastPage'],
+    anchors: ['charter0', 'charter1', 'charter2', 'charter3', 'charter4'],
     menu: '#menu',
-    scrollOverflow: true
+    scrollOverflow: true,
+    
   });
 });
