@@ -1,9 +1,12 @@
 .section{
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
   background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
   color: #000;
-  & .container{
-    padding-top: 60px;
-  }
 }
 #section0{
   background-image: url(../img/bg1.jpg);
@@ -20,6 +23,14 @@
 }
 #section4{
   background-image: url(../img/map.jpg);
+  height: 6493px !important;
+  & .fp-tableCell{
+    display: block !important;
+    height: 100% !important;
+  }
+  & .fp-scrollable{
+    height: 100% !important;
+  }
 }
 #section5{
   background: linear-gradient(to top, #5ac1d2, #dce0e1);
