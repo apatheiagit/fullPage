@@ -6,5 +6,6 @@ $(document).ready(function() {
     paddingTop: '60px',
     hybrid:true,
     fitToSection: false,
+    scrollingSpeed: 2000
   });
 });
