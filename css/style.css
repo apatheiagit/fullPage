@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 @import 'https://fonts.googleapis.com/css?family=Cuprum|Open+Sans|Open+Sans+Condensed:300|Scada:700&subset=cyrillic';
 /* header */
 
@@ -95,3 +96,6 @@
 .full-map {
   background: url(../img/section4.jpg) no-repeat center center;
 }
+=======
+@import 'https://fonts.googleapis.com/css?family=Cuprum|Open+Sans|Open+Sans+Condensed:300|Scada:700&subset=cyrillic';#header{position:fixed;display:block;width:100%;z-index:9;top:15px}@media (max-width:992px){#header{display:none}}.header-nav{background:#ecebeb;border-radius:30px;overflow:hidden;height:60px}.header-nav .back-button{float:left}.header-nav .back-button a{display:block;background:url(../img/bg-arrow-back.png) center center no-repeat #000;height:60px;width:60px}#menu{margin:0 0 0 60px;overflow:hidden;padding:0;text-align:left}#menu li{display:inline-block;font-family:'Open Sans Condensed',sans-serif}#menu li:first-child a{padding:0 17px}#menu li.active a{color:#f1592a}#menu li a{color:#161711;display:inline-block;font-size:18px;padding:18px 17px 17px;text-transform:uppercase;text-decoration:none}.section{-webkit-background-size:cover;-moz-background-size:cover;-o-background-size:cover;background-size:cover;background-repeat:no-repeat;background-attachment:fixed;background-position:center;color:#000}.story-type{font-size:14px;font-family:'Open Sans',sans-serif;margin:10px 0;text-transform:uppercase}.main-title{font-size:68px;font-family:Scada,sans-serif;font-weight:700;line-height:60px;margin:20px 0;max-width:350px}.section-title{font-family:Cuprum,sans-serif;font-size:36px;line-height:1.17;margin:10px 0}.text-content p{font-size:22px;font-family:'Times New Roman',sans-serif;line-height:1.45;margin-bottom:10px}.full-map{background:url(../img/section4.jpg) no-repeat center center}
+>>>>>>> origin/master
