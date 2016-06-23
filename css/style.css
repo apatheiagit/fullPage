@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-@import 'https://fonts.googleapis.com/css?family=Cuprum|Open+Sans|Open+Sans+Condensed:300|Scada:700&subset=cyrillic';
+@import 'https://fonts.googleapis.com/css?family=Cuprum|Open+Sans:300|Open+Sans+Condensed:300|Scada:700&subset=cyrillic';
 /* header */
 
 #header {
@@ -15,15 +14,15 @@
   }
 }
 .header-nav {
-  background: #ecebeb;
-  border-radius: 30px;
-  overflow: hidden;
+  background: white;
+  border-radius: 35px 25px 25px 35px;
   height: 60px;
 }
 .header-nav .back-button {
   float: left;
 }
 .header-nav .back-button a {
+  border-radius: 25px 0 0 25px;
   display: block;
   background: url(../img/bg-arrow-back.png) center center no-repeat black;
   height: 60px;
@@ -42,7 +41,8 @@
 #menu li:first-child a {
   padding: 0px 17px;
 }
-#menu li.active a {
+#menu li.active a,
+#menu li:hover a {
   color: #f1592a;
 }
 #menu li a {
@@ -56,14 +56,18 @@
 /* sections */
 
 .section {
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
   background-repeat: no-repeat;
+  background-size: cover;
   background-attachment: fixed;
   background-position: center;
   color: black;
+}
+.section.dark-section {
+  color: white;
+}
+.section.map-section {
+  padding-top: 0px !important;
+  padding-bottom: 0px !important;
 }
 .story-type {
   font-size: 14px;
@@ -81,8 +85,13 @@
 }
 .section-title {
   font-family: 'Cuprum', sans-serif;
-  font-size: 36px;
-  line-height: 1.17;
+  font-size: 38px;
+  line-height: 1.15;
+  margin: 10px 0;
+}
+.chapter-subtitle {
+  font-family: 'Cuprum', sans-serif;
+  font-size: 16px;
   margin: 10px 0;
 }
 .text-content p {
@@ -91,11 +100,70 @@
   line-height: 1.45;
   margin-bottom: 10px;
 }
+@media (max-width: 992px) {
+  .text-content {
+    background-color: rgba(255, 255, 204, 0.6);
+    padding: 15px;
+  }
+}
+@media (max-width: 992px) {
+  .dark-section .text-content {
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 15px;
+  }
+}
+.full-map .text-content {
+  margin-bottom: 30px;
+}
+.text-content img {
+  box-shadow: -10px 10px 50px 0px rgba(0, 0, 0, 0.5);
+  margin: 10px auto 30px;
+}
+.photo-carousel-wrap {
+  box-shadow: -10px 10px 50px 0px rgba(0, 0, 0, 0.5);
+  margin: 20px auto;
+}
+.photo-carousel-wrap--small {
+  max-height: 614px;
+  max-width: 490px;
+}
+.photo-carousel-wrap--big {
+  margin: 20px 0;
+}
+.photo-carousel-wrap .owl-nav > div {
+  background-image: url(../img/bg-carousel-slider.png);
+  background-repeat: no-repeat;
+  cursor: pointer;
+  height: 83px;
+  width: 40px;
+  position: absolute;
+  top: 50%;
+  margin-top: -42px;
+}
+.photo-carousel-wrap .owl-nav .owl-prev {
+  background-position: left top;
+  left: 20px;
+}
+.photo-carousel-wrap .owl-nav .owl-next {
+  background-position: right top;
+  right: 20px;
+}
+.text-vrezka {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 30px;
+  font-weight: 300;
+  line-height: 1.2;
+  margin: 40px 120px;
+}
+@media (max-width: 992px) {
+  .text-vrezka {
+    margin: 20px 20px;
+  }
+}
 /* maps */
 
 .full-map {
-  background: url(../img/section4.jpg) no-repeat center center;
+  background: url(../img/section4.jpg) no-repeat center top;
+  padding-top: 100px;
+  padding-bottom: 100px;
 }
-=======
-@import 'https://fonts.googleapis.com/css?family=Cuprum|Open+Sans|Open+Sans+Condensed:300|Scada:700&subset=cyrillic';#header{position:fixed;display:block;width:100%;z-index:9;top:15px}@media (max-width:992px){#header{display:none}}.header-nav{background:#ecebeb;border-radius:30px;overflow:hidden;height:60px}.header-nav .back-button{float:left}.header-nav .back-button a{display:block;background:url(../img/bg-arrow-back.png) center center no-repeat #000;height:60px;width:60px}#menu{margin:0 0 0 60px;overflow:hidden;padding:0;text-align:left}#menu li{display:inline-block;font-family:'Open Sans Condensed',sans-serif}#menu li:first-child a{padding:0 17px}#menu li.active a{color:#f1592a}#menu li a{color:#161711;display:inline-block;font-size:18px;padding:18px 17px 17px;text-transform:uppercase;text-decoration:none}.section{-webkit-background-size:cover;-moz-background-size:cover;-o-background-size:cover;background-size:cover;background-repeat:no-repeat;background-attachment:fixed;background-position:center;color:#000}.story-type{font-size:14px;font-family:'Open Sans',sans-serif;margin:10px 0;text-transform:uppercase}.main-title{font-size:68px;font-family:Scada,sans-serif;font-weight:700;line-height:60px;margin:20px 0;max-width:350px}.section-title{font-family:Cuprum,sans-serif;font-size:36px;line-height:1.17;margin:10px 0}.text-content p{font-size:22px;font-family:'Times New Roman',sans-serif;line-height:1.45;margin-bottom:10px}.full-map{background:url(../img/section4.jpg) no-repeat center center}
->>>>>>> origin/master

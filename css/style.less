@@ -1,4 +1,4 @@
-@import 'https://fonts.googleapis.com/css?family=Cuprum|Open+Sans|Open+Sans+Condensed:300|Scada:700&subset=cyrillic';
+@import 'https://fonts.googleapis.com/css?family=Cuprum|Open+Sans:300|Open+Sans+Condensed:300|Scada:700&subset=cyrillic';
 @font-family: 'Open Sans', sans-serif;
 @menu-font: 'Open Sans Condensed', sans-serif;
 @title-family: 'Scada', sans-serif;
@@ -22,13 +22,13 @@
   }
 }
 .header-nav{
-  background: #ecebeb;
-  border-radius: 30px;
-  overflow: hidden;
+  background: #fff;
+  border-radius: 35px 25px 25px 35px;
   height: 60px;    
   & .back-button{
     float: left;
     & a{
+      border-radius: 25px 0 0 25px;
       display: block;
       background: url(../img/bg-arrow-back.png) center center no-repeat #000;
       height: 60px;
@@ -49,7 +49,7 @@
         padding: 0px 17px;
       }    
     }
-    &.active{
+    &.active, &:hover{
       & a{
         color: #f1592a;
       }
@@ -66,14 +66,18 @@
 }
 /* sections */
 .section{
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
   background-repeat: no-repeat;
+  background-size: cover;  
   background-attachment: fixed;
   background-position: center;
   color: #000;
+  &.dark-section{
+    color: #FFF;
+  }
+  &.map-section{
+   padding-top: 0px !important;
+   padding-bottom: 0px !important;
+  }
 }
 .story-type{
   font-size: 14px;
@@ -91,8 +95,13 @@
 }
 .section-title{
   font-family: @special-font;
-  font-size: 36px;
-  line-height: 1.17;
+  font-size: 38px;
+  line-height: 1.15;
+  margin: 10px 0;
+}
+.chapter-subtitle{
+  font-family: @special-font;
+  font-size: 16px;
   margin: 10px 0;
 }
 .text-content{
@@ -102,8 +111,68 @@
     line-height: 1.45;
     margin-bottom: 10px;
   }
+  @media @mobile_tablet{
+    background-color: rgba(255,255,204,0.6);
+    padding: 15px;
+  }
+  .dark-section &{
+    @media @mobile_tablet{
+      background-color: rgba(0,0,0,0.5);
+      padding: 15px;
+    }
+  }
+  .full-map &{
+    margin-bottom: 30px;
+  }
+  & img{
+    box-shadow: -10px 10px 50px 0px rgba(0,0,0,0.5);
+    margin: 10px auto 30px;
+  }
+}
+.photo-carousel-wrap{
+  box-shadow: -10px 10px 50px 0px rgba(0,0,0,0.5);
+  margin: 20px auto;
+  &--small{
+    max-height: 614px;
+    max-width: 490px;
+  }
+  &--big{
+    margin: 20px 0;
+  }
+  & .owl-nav{
+    &>div{
+      background-image: url(../img/bg-carousel-slider.png);
+      background-repeat: no-repeat;  
+      cursor: pointer;     
+      height: 83px;
+      width: 40px;
+      position: absolute;
+      top: 50%;
+      margin-top: -42px;      
+    }
+    & .owl-prev{
+      background-position: left top;
+      left: 20px;
+    }
+    & .owl-next{
+      background-position: right top;
+      right: 20px;
+    }
+  }
+}
+.text-vrezka{
+  font-family: @font-family;
+  font-size: 30px;
+  font-weight: 300;
+  line-height: 1.2;
+  margin: 40px 120px;
+  @media @mobile_tablet{
+    margin: 20px 20px;
+  }
 }
 /* maps */
 .full-map{
-  background: url(../img/section4.jpg) no-repeat center center;
+  background: url(../img/section4.jpg) no-repeat center top;
+  padding-top: 100px;
+  padding-bottom: 100px;
 }
