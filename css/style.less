@@ -5,6 +5,7 @@
 @special-font: 'Cuprum', sans-serif;
 @commom-font: 'Times New Roman', sans-serif;
 @text-color: #161711;
+@lime: #44b549;
 @mobile: ~"(max-width: 768px)";
 @tablet: ~"(min-width: 768px) and (max-width: 992px)";
 @mobile_tablet: ~"(max-width: 992px)";
@@ -54,8 +55,9 @@
         color: #f1592a;
       }
     }
-    & a{
+    & a, & span{
       color: @text-color;
+      cursor: pointer;
       display:inline-block;
       font-size: 18px;
       padding: 18px 17px 17px;
@@ -199,6 +201,7 @@
 }
 .link-totop{
   border: 1px solid #FFF;
+  border-radius: 2px;
   color: #FFF;
   display: inline-block;
   font-size: 14px;
@@ -219,5 +222,59 @@
 .full-map{
   background: url(../img/section4.jpg) no-repeat center top;
   padding-top: 100px;
-  padding-bottom: 100px;
+  padding-bottom: 70px;
+}
+.pin-wrap{
+  position: absolute;
+  &:hover{
+    & .pin-block{
+      display: block;
+    }
+  }
+  & .pin-icon{
+    background: url(../img/story-pin.png) no-repeat;
+    cursor: pointer;
+    height: 60px;
+    position: relative;
+    width: 40px;
+    //z-index: 1;
+  }
+  & .pin-block{
+    background: #fff;
+    border-radius: 10px;
+    display: none;
+    font-family: @font-family;
+    padding: 10px 20px;
+    position: relative;
+    min-height: 160px;
+    min-width: 240px;
+    max-width: 300px;
+    z-index: 10;
+    transition: all 0.5s ease-in-out;
+    & .title{      
+      font-size: 14px;
+      font-weight: 600;
+      margin: 10px 0;
+      text-transform: uppercase;
+      & a{
+        color: @text-color;
+      }
+    }
+    & .contacts{
+      font-size: 12px;
+      margin: 10px 0;
+    }
+    & .more{
+      border: 1px solid @lime;
+      border-radius: 2px;
+      color: @lime;
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 5px 10px;      
+      &:hover, &:active{
+        color: @lime;
+      }
+    }
+  }
 }
