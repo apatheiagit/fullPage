@@ -1007,6 +1007,8 @@
         * Determines the way of scrolling up or down:
         * by 'automatically' scrolling a section or by using the default and normal scrolling.
         */
+        //EXTRA CHECK TO PREVENT EARLY SECTION SCROLLING
+        var lastScrollTime = 0;
         function scrolling(type, scrollable){
             if (!isScrollAllowed.m[type]){
                 return;
@@ -1021,10 +1023,18 @@
                 scrollSection = FP.moveSectionUp;
             }
 
+            //EXTRA CHECK TO PREVENT EARLY SECTION SCROLLING           
+            var currentScrollTime = new Date().getTime();
+            var lastScrollTimeDiff = currentScrollTime - lastScrollTime;
+            lastScrollTime = currentScrollTime;
+
             if(scrollable.length > 0 ){
                 //is the scrollbar at the start/end of the scroll?
                 if(options.scrollOverflowHandler.isScrolled(check, scrollable)){
-                    scrollSection();
+                    //EXTRA CHECK TO PREVENT EARLY SECTION SCROLLING 
+                    if (lastScrollTimeDiff<250) {
+                        scrollSection();                        
+                    }
                 }else{
                     return true;
                 }
@@ -1304,7 +1314,7 @@
             var sectionBottom = position - windowsHeight + element.outerHeight();
 
             //is the destination element bigger than the viewport?
-            if(element.outerHeight() > windowsHeight){
+            if(element.outerHeight() > windowsHeight && options.autoScrolling){
                 //scrolling up?
                 if(!isScrollingDown){
                     position = sectionBottom;
@@ -1312,7 +1322,7 @@
             }
 
             //sections equal or smaller than the viewport height && scrolling down? ||  is resizing and its in the last section
-            else if(isScrollingDown || (isResizing && element.is(':last-child')) ){
+            else if((isScrollingDown && options.autoScrolling) || (isResizing && element.is(':last-child')) ){
                 //The bottom of the destination will be at the bottom of the viewport
                 position = sectionBottom;
             }

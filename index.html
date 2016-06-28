@@ -10,9 +10,9 @@
 	<link rel="stylesheet" href="js/plugins/owl/owl.carousel.css">
 	<script src="js/jquery.min.js"></script>
 	<script src="js/jquery.easings.min.js"></script>
-	<script src="js/scrolloverflow.min.js"></script>
-	<script src="js/jquery.fullPage.min.js"></script>
-	<script src="js/jquery.scrollTo.min.js"></script>
+	<script src="js/scrolloverflow.min.js"></script>	
+	<script src="js/modernizr-custom.js"></script>
+	<script src="js/jquery.fullPage.js"></script>
 	<script src="js/plugins/owl/owl.carousel.min.js"></script>	
 </head>
 <body>
@@ -27,8 +27,8 @@
 		    <li data-menuanchor="charter2"><a href="#charter2">древний китион</a></li>
 		    <li data-menuanchor="charter3"><a href="#charter3">соленое озеро</a></li>
 		    <li data-menuanchor="charter4"><a href="#charter4">встреча с апостолами</a></li>
-		    <!--<li ><span class="pseudo-anchor" data-href="#map2">глина</span></li>
-		    <li ><span class="pseudo-anchor" data-href="#map3">церковь</span></li>-->
+		    <li ><span class="anchor" data-href="#map2">глина</span></li>
+		    <li ><span class="anchor" data-href="#map3">церковь</span></li>
 		</ul>
 	</div>
 	</div>
@@ -95,8 +95,8 @@
 		</div>
 	  </div>
 	</div>
-	<div class="section map-section" id="section4" >
-	 <div class="full-map">
+	<div class="section map-section"  >
+	 <div class="full-map" id="section4">
         <div class="container">
 		<div class="row">
 			<div class="col-md-6">
@@ -104,7 +104,7 @@
 				<div class="pin-wrap" style="top: 810px; left:36px;">
 					<div class="pin-icon"></div>
 					<div class="pin-block">
-						<div class="title"><a href="#">6Rider, 6D кинотеатр в ТЦ MYMALL</a></div>
+						<div class="title"><a href="http://google.ru">6Rider, 6D кинотеатр в ТЦ MYMALL</a></div>
 						<div class="contacts">Address: Franklin Roosevelt, 285, Limassol;<br>Contact: +357 25823030</div>
 						<a href="#" class="more">Узнать больше</a>
 					</div>
@@ -231,6 +231,7 @@
 				</div>
 			  </div>
 			</div>
+			<div id="map0"></div>
 			<div class="col-md-6">
 				<div id="map1" class="text-content">
 					<h1 class="section-title">Встреча с апостолами и Пресвятой Богородицей</h1>
@@ -321,28 +322,24 @@
   </div>
   <script>
   	$(document).ready(function() {
+	   var scrollOptions = {click: false,  wheelStep: 20};
+	    if (Modernizr.touch) {
+	      scrollOptions.click = true;
+	    }
 	  $('#fullpage').fullpage({
 	    anchors: ['charter0', 'charter1', 'charter2', 'charter3', 'charter4','charter5', 'charter6', 'footer'],
 	    menu: '#menu',
 	    scrollOverflow: true,
+	    scrollOverflowOptions: scrollOptions,
 	    hybrid:true,
 	    fitToSection: false,
 	    scrollingSpeed: 1000,
 	    paddingTop: '100px',
         paddingBottom: '100px',
         fixedElements: '#header',  
-       /* afterLoad: function(anchorLink, index){
-        	$(document).on("click", ".pseudo-anchor", function () {
-	        var id = $(this).attr("data-href");
-	        var elem = $(id);
-	        $.fn.fullpage.moveTo('charter4', 2);
-	        var topPos = elem.position().top;
-	        console.log(id+" offset.top: "+elem.position().top);
-	        console.log(id+" offsetTop: "+topPos);
-	        //$('#section4').scrollTop(position);
-	        $('#section4').scrollTop(topPos);
-	      });
-        }   */  
+       	afterLoad: function(anchorLink, index) {
+
+	      } 
 	  });
 	  $(".photo-carousel").owlCarousel({
 	  	loop:true,
@@ -350,7 +347,14 @@
 	    nav: true,
   		navText: ["",""]
 	  });	 
-	  
+	  $('.anchor').click(function(e){
+	          e.preventDefault();
+	          var elem = $(this).attr('data-href');
+	          var map_diff = $(elem).offset().top - $('#map0').offset().top - $('#map0').outerHeight();
+	          $.fn.fullpage.moveTo('charter4');
+	          $('#section4').css('transform', 'translate3d(0px, -' + map_diff + 'px, 0px)'); 
+	          console.log(map_diff);     
+	        })
       setInterval(function(){
 		  var loadedSection = $('.changeBackground');
 		  var image1 = loadedSection.attr('data-image1');
